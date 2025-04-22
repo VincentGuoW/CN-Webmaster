@@ -21,17 +21,19 @@ public class OAuthTokenFetcher {
 
         //Build request:
         connection.setRequestMethod("POST");//post or POST all work
-        connection.setRequestProperty("Content-Type","application/json");
+        //change from json to x-www-form-urlencoded
+        connection.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
         connection.setRequestProperty("x-apikey", API_KEY);
 
         //Creat Basic Authorization Header
         String authValue = API_KEY +":"+API_SECRET;
         String encodedAuString = Base64.getEncoder().encodeToString(authValue.getBytes(StandardCharsets.UTF_8));
-        connection.setRequestProperty("Authorization", "Basic"+encodedAuString);
+        connection.setRequestProperty("Authorization", "Basic "+encodedAuString);
 
         //Send request
         connection.setDoOutput(true);
-        String requestBody = "{\"grant_type\":\"client_credentials\"}";
+        //change from  "{\"grant_type\":\"client_credentials\"}"; to 
+        String requestBody = "grant_type=client_credentials";
         try (OutputStream os = connection.getOutputStream()) {
             byte[] input = requestBody.getBytes(StandardCharsets.UTF_8);
             os.write(input, 0, input.length);
