@@ -17,7 +17,7 @@ public class Main {
         String token = OAuthTokenFetcher.getAccessToken();
         String etaString = EstimatedTime.getETA(token, containerNumber);
 
-        //System.out.println(etaString);
+        //System.out.println(etaString); test test
 
         Map<String,Object> etaMap = EtaToMap.parseJsonToMap(etaString);
         MapToString.mapToString(etaMap);
