@@ -45,33 +45,49 @@ public class MapToString {
             Map<String, Object> storageCharge = (Map<String, Object>) container.get("StorageCharge");
             String lastFreeDay = storageCharge != null ? (String) storageCharge.get("LastFreeDay") : null;
 
+            Map<String, Object> eta = (Map<String, Object>) container.get("ETA");
+            String etaTime = eta != null ? (String) eta.get("Time") : null;
+            String etaDescription = eta != null ? (String) eta.get("Description") : null;
+            String etaLastUpdated = eta != null ? (String) eta.get("LastUpdatedTimestamp") : null;
+
+            Map<String, Object> etaLocation = eta != null ? (Map<String, Object>) eta.get("Location") : null;
+            String etaStation = etaLocation != null ? (String) etaLocation.get("Station") : null;
+            String etaProvState = etaLocation != null ? (String) etaLocation.get("ProvState") : null;
+
             System.out.println("=== Container: " + id + " ===");
-            System.out.println("Waybill Status: " + waybillStatus);
-            System.out.println("Load/Empty: " + loadEmpty);
+            // System.out.println("Waybill Status: " + waybillStatus);
+            // System.out.println("Load/Empty: " + loadEmpty);
             System.out.println("Car Kind: " + carKind + " (" + carKindDescription + ")");
             System.out.println("Destination: " + destStation + ", " + destProvState + ", " + destCountryCode);
 
-            System.out.println("Event: " + eventDesc + " @ " + eventTime);
-            System.out.println("Event Location: " + eventStation + ", " + eventProvState);
-
+            //System.out.println("Event: " + eventDesc + " @ " + eventTime);
+            // System.out.println("Event Location: " + eventStation + ", " +
+            // eventProvState);
+            if (etaTime != null || etaDescription != null) {
+                System.out.println("ETA: " + etaDescription + " @ " + etaTime);
+            }else{
+                System.out.println("ETA:  NONE" );
+            }
             System.out.println("Lot Location: Lot=" + lot + ", Row=" + row + ", Spot=" + spot);
 
-            System.out.println("Weights:");
-            if (weights != null) {
-                for (Map<String, Object> w : weights) {
-                    System.out.println("  " + w.get("Type") + ": " + w.get("Weight") + " " + w.get("Unit"));
-                }
-            }
+            // System.out.println("Weights:");
+            // if (weights != null) {
+            // for (Map<String, Object> w : weights) {
+            // System.out.println(" " + w.get("Type") + ": " + w.get("Weight") + " " +
+            // w.get("Unit"));
+            // }
+            // }
 
             System.out.println("Customs Hold: " + customsDesc + " @ " + customsTimestamp);
 
-            System.out.println("Customs Holds List:");
-            if (customsHolds != null) {
-                for (Map<String, Object> ch : customsHolds) {
-                    System.out.println("  Description: " + ch.get("Description") + ", Timestamp: " + ch.get("Timestamp")
-                            + ", Direction: " + ch.get("Direction"));
-                }
-            }
+            // System.out.println("Customs Holds List:");
+            // if (customsHolds != null) {
+            // for (Map<String, Object> ch : customsHolds) {
+            // System.out.println(" Description: " + ch.get("Description") + ", Timestamp: "
+            // + ch.get("Timestamp")
+            // + ", Direction: " + ch.get("Direction"));
+            // }
+            // }
 
             System.out.println("Storage Charge Last Free Day: " + lastFreeDay);
 
