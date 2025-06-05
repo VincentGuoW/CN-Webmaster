@@ -35,7 +35,7 @@ public class HomePage {
         inputArea.setLineWrap(true);
         inputArea.setWrapStyleWord(true);
         inputArea.setPreferredSize(new Dimension(300, 900));
-        
+
         JButton startButton = new JButton("元神启动");
         startButton.setPreferredSize(new Dimension(120, 30));
 
@@ -66,7 +66,8 @@ public class HomePage {
                     Map<String, Object> thirdPartyShipment = (Map<String, Object>) data
                             .get("ThirdPartyIntermodalShipment");
                     if (thirdPartyShipment == null) {
-                        System.out.println("No ThirdPartyIntermodalShipment data for container " + container);
+                        resultList.add(new ContainerInfo(container, "???CP???", "???CP???", "???CP???", "???CP???", "???CP???",
+                                "???CP???", "???CP???", "???CP???"));
                         continue;
                     }
 
@@ -101,9 +102,10 @@ public class HomePage {
 
                     // 你代码里 lot,row,spot 等字段，JSON 里没有找到，如果你确定有，可以继续按类似方式取
                     // 这里用空字符串代替
-                    String lot = "";
-                    String row = "";
-                    String spot = "";
+                    Map<String, Object> locationMap = (Map<String, Object>) equipment.get("LotLocation");
+                    String lot = locationMap != null ? (String) locationMap.getOrDefault("Lot", "") : "";
+                    String row = locationMap != null ? (String) locationMap.getOrDefault("Row", "") : "";
+                    String spot = locationMap != null ? (String) locationMap.getOrDefault("Spot", "") : "";
 
                     // CustomsHold 是个 Map，取 Description 字段
                     Map<String, Object> customsHoldMap = (Map<String, Object>) equipment.get("CustomsHold");
