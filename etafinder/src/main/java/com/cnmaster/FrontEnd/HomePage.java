@@ -66,8 +66,7 @@ public class HomePage {
                     Map<String, Object> thirdPartyShipment = (Map<String, Object>) data
                             .get("ThirdPartyIntermodalShipment");
                     if (thirdPartyShipment == null) {
-                        resultList.add(new ContainerInfo(container, "???CP???", "???CP???", "???CP???", "???CP???", "???CP???",
-                                "???CP???", "???CP???", "???CP???"));
+                        System.out.println("Need at least one container info");
                         continue;
                     }
 
@@ -75,12 +74,19 @@ public class HomePage {
                     List<Map<String, Object>> equipmentList = (List<Map<String, Object>>) thirdPartyShipment
                             .get("Equipment");
                     if (equipmentList == null || equipmentList.isEmpty()) {
-                        System.out.println("No Equipment data for container " + container);
+                        resultList.add(
+                                new ContainerInfo(container, "???CP???", "???CP???", "???CP???", "???CP???", "???CP???",
+                                        "???CP???", "???CP???", "???CP???"));
                         continue;
                     }
 
+                    // String waybillStatus = (String) container.get("WaybillStatus")
+                    
                     // 取第一个设备的详细信息
                     Map<String, Object> equipment = equipmentList.get(0);
+
+                   
+
 
                     String containerId = (String) equipment.getOrDefault("EquipmentId", container);
                     String carkind = (String) equipment.getOrDefault("CarKind", "");
@@ -90,6 +96,16 @@ public class HomePage {
                     carKindMap.put("KC2", "40GP");
                     carKindMap.put("KR4", "40RH");
                     String carKind = carKindMap.getOrDefault(carkind, carkind);
+
+
+                    String waybillStatus = (String) equipment.get("WaybillStatus");
+
+                    if ("Closed".equalsIgnoreCase(waybillStatus)) {
+                        resultList.add(
+                                new ContainerInfo(container, carKind, "***CLOSED***", "***CLOSED***", "***CLOSED***", "***CLOSED***",
+                                        "***CLOSED***", "***CLOSED***", "***CLOSED***"));
+                        continue;
+                    }
 
                     // Destination 是个 Map，取 Station 字段
                     Map<String, Object> destinationMap = (Map<String, Object>) equipment.get("Destination");
