@@ -13,14 +13,14 @@ public class Main {
         //System.out.println(); //
         HomePage.Mainpage();
         
-        String containerNumber = "EGHU9298856";
-        String token = OAuthTokenFetcher.getAccessToken();
-        String etaString = EstimatedTime.getETA(token, containerNumber);
-
-        System.out.println(etaString);
-
-        Map<String,Object> etaMap = EtaToMap.parseJsonToMap(etaString);
-        MapToString.mapToString(etaMap);
+        //String containerNumber = "EGHU9298856";
+        //String token = OAuthTokenFetcher.getAccessToken();
+        //String etaString = EstimatedTime.getETA(token, containerNumber);
+//
+        //System.out.println(etaString);
+//
+        //Map<String,Object> etaMap = EtaToMap.parseJsonToMap(etaString);
+        //MapToString.mapToString(etaMap);
          //*/
     }//
 
