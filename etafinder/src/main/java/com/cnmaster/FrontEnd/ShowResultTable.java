@@ -35,6 +35,7 @@ public class ShowResultTable {
             column.setPreferredWidth(columnWidths[i]);
         }
 
+        //add scrollpane into the result table
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);

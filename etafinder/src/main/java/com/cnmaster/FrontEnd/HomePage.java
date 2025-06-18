@@ -116,7 +116,7 @@ public class HomePage {
                     Map<String, Object> etaMap = (Map<String, Object>) equipment.get("ETA");
                     String eta = etaMap != null ? (String) etaMap.getOrDefault("Time", "") : "";
 
-                    // 你代码里 lot,row,spot 等字段，JSON 里没有找到，如果你确定有，可以继续按类似方式取
+                    
                     // 这里用空字符串代替
                     Map<String, Object> locationMap = (Map<String, Object>) equipment.get("LotLocation");
                     String lot = locationMap != null ? (String) locationMap.getOrDefault("Lot", "") : "";
